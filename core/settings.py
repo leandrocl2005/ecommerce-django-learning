@@ -32,7 +32,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost:8000", "localhost"]
 INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'store', 'basket'
+    'django.contrib.messages', 'django.contrib.staticfiles', 'store', 'basket',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,15 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # Use media folder in django (custom)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Use custom user
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login'
+
+PASSWORD_RESET_TIMEOUT_DAYS = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
