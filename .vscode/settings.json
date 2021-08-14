@@ -1,12 +1,45 @@
 {
+  // editor configuration
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "'Droid Sans Mono', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 18,
+  "editor.tabSize": 2,
+  "editor.lineHeight": 28,
+  "editor.letterSpacing": 0.5,
+  "editor.semanticHighlighting.enabled": false,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  // workbench configuration
+  "workbench.colorTheme": "Omni",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "newUntitledFile",
+  // python configuration
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": [
     "--max-line-length=120",
     "--ignore=E111,E114,W504",
   ],
-  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  },
   "python.formatting.provider": "yapf",
   "python.formatting.yapfArgs": [
     "--style={based_on_style: pep8, indent_width: 2}"
-  ]
+  ],
+  // Django extension Baptiste Darthenay
+  "files.associations": {
+    "**/*.html": "jinja-html",
+    "**/templates/**/*.html": "django-html",
+    "**/templates/**/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  // Emmet
+  "emmet.includeLanguages": {
+    "jinja-html": "html"
+  }
 }
