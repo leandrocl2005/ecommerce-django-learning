@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from orders.models import Order
 from orders.views import user_orders
 from store.models import Product
 
@@ -130,7 +131,12 @@ def add_address(request):
   if request.method == "POST":
     address_form = UserAddressForm(data=request.POST)
     if address_form.is_valid():
+      total_user_address = Address.objects.filter(
+          customer=request.user.id).count()
+      print("$$$", total_user_address)
       address_form = address_form.save(commit=False)
+      if total_user_address == 0:
+        address_form.default = True
       address_form.customer = request.user
       address_form.save()
       return HttpResponseRedirect(reverse("account:addresses"))
@@ -169,4 +175,18 @@ def set_default(request, id):
   Address.objects.filter(customer=request.user,
                          default=True).update(default=False)
   Address.objects.filter(pk=id, customer=request.user).update(default=True)
+
+  previous_url = request.META.get("HTTP_REFERER")
+
+  if "delivery_address" in previous_url:
+    return redirect("checkout:delivery_address")
+
   return redirect("account:addresses")
+
+
+@login_required
+def user_order(request):
+  user_id = request.user.id
+  orders = Order.objects.filter(user_id=user_id).filter(billing_status=True)
+  return render(request, "account/dashboard/user_orders.html",
+                {"orders": orders})

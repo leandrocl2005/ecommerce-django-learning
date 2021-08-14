@@ -6,6 +6,13 @@
 {% block sub_content %}
 <h1 class="h2">Your Addresses</h1>
 <div>Manage your <b>addresses</b> and delivery preferences</div>
+  {% if messages %}
+  <div class="alert alert-warning mt-3" alert-"{{ message.tags }}" role="alert">
+  {% for message in messages  %}
+    {{message|safe}}
+  {% endfor %}
+  </div>
+  {% endif %}
 <hr />
 <div class="container px-0">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

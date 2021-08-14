@@ -32,8 +32,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost:8000", "localhost"]
 INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
-    'django.contrib.messages', 'django.contrib.staticfiles', 'store', 'basket',
-    'account', 'orders', 'mptt'
+    'django.contrib.messages', 'django.contrib.staticfiles', 'store',
+    'checkout', 'basket', 'account', 'orders', 'mptt'
 ]
 
 MIDDLEWARE = [
